@@ -15,9 +15,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/login","/logout").permitAll()
+                .requestMatchers("/logout").permitAll()
                 .anyRequest().authenticated();
-        http.formLogin();
+        http
+                .formLogin()
+                .loginPage("/login")
+                .permitAll() ;
 //        http.httpBasic();
         return http.build();
     }
